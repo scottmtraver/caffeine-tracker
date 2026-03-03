@@ -47,12 +47,12 @@ export default function CaffeineGrid() {
     return total
   }
 
-  function getHourlyAvg(hour: number): number {
+  function getHourlyTotal(hour: number): number {
     let total = 0
     for (const d of dates) {
       total += getAmount(format(d, 'yyyy-MM-dd'), hour)
     }
-    return Math.round(total / dates.length)
+    return total
   }
 
   const grandTotal = useMemo(() => {
@@ -60,7 +60,7 @@ export default function CaffeineGrid() {
     for (const d of dates) {
       total += getDailyTotal(format(d, 'yyyy-MM-dd'))
     }
-    return Math.round(total / dates.length)
+    return total
   }, [gridData, dates])
 
   return (
@@ -115,14 +115,14 @@ export default function CaffeineGrid() {
           style={{ display: 'grid', gridTemplateColumns: GRID_COLUMNS, gap: '3px', borderTop: '1px solid #F3F4F6', paddingTop: '12px', marginTop: '24px' }}
         >
           <div style={{ display: 'flex', alignItems: 'center', fontSize: '10px', fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Avg Hourly
+            Hourly
           </div>
           {GRID_HOURS.map((hour) => (
             <div
               key={hour}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#F3F4F6', borderRadius: '3px', fontSize: '11px', fontWeight: 700, color: '#111827', aspectRatio: '1 / 0.8' }}
             >
-              {getHourlyAvg(hour)}
+              {getHourlyTotal(hour)}
             </div>
           ))}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#ECFDF5', borderRadius: '3px', fontSize: '11px', fontWeight: 700, color: '#047857', aspectRatio: '1 / 0.8' }}>
