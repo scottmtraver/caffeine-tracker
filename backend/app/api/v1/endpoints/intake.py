@@ -15,7 +15,7 @@ async def create_intake(
     intake_in: IntakeCreate,
     db: AsyncSession = Depends(get_db),
 ):
-    return await intake_service.create_intake(db, intake_in)
+    return intake_service.create_intake(db, intake_in)
 
 
 @router.get("/", response_model=list[IntakeResponse])
